@@ -9,12 +9,21 @@ export class WalletService {
   }
 
   findAll() {
-    //get - get all wallets using prisma 
-    
+    const wallets = await this.prisma.investor.findMany();
+      if (!investors.length) {
+        throw new NotFoundException('No investors found');
+      }
+      return wallets;
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} wallet`;
+    const wallet = await this.prisma.investor.findUnique({
+        where: { id },
+      });
+      if (!wallet) {
+        throw new NotFoundException(`Investor with ID ${id} not found`);
+      }
+      return wallet;
   }
 
   update(id: number, updateWalletDto: UpdateWalletDto) {
