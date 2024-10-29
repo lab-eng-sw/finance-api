@@ -4,6 +4,8 @@ import { UpdateWalletDto } from './dto/update-wallet.dto';
 
 @Injectable()
 export class WalletService {
+  constructor(private readonly prisma: PrismaService) {}
+  
   create(createWalletDto: CreateWalletDto) {
     return 'This action adds a new wallet';
   }
